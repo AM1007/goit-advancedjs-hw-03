@@ -1,4 +1,4 @@
-### Pussycat Search
+### :heart_eyes_cat: Pussycat Search :heart_eyes_cat:
 
 Create the frontend part of an application for searching information about a cat
 by its breed. Watch the demo video of the program in action; use it as a guide
@@ -45,7 +45,7 @@ parameter `breed_ids` in this request with the breed identifier.
 Here's how the URL request will look like to retrieve full information about a
 cat based on the breed identifier:
 
-```js
+```html
 https://api.thecatapi.com/v1/images/search?breed_ids=ідентифікатор_породи
 ```
 
@@ -92,6 +92,8 @@ based on the breed.
   loaders, like https://cssloaders.github.io/.
 - For `p.error`, you can employ any library with appealing notifications, such
   as [iziToast](https://izitoast.marcelodolza.com/).
+
+---
 
 ## Preparing for work
 
