@@ -19,7 +19,7 @@ to use axios and add the header to all requests.
 ```js
 import axios from 'axios';
 
-axios.defaults.headers.common['x-api-key'] = 'твій ключ';
+axios.defaults.headers.common['x-api-key'] = 'YOUR_KEY';
 ```
 
 #### Collection of breeds
@@ -46,7 +46,7 @@ Here's how the URL request will look like to retrieve full information about a
 cat based on the breed identifier:
 
 ```html
-https://api.thecatapi.com/v1/images/search?breed_ids=ідентифікатор_породи
+https://api.thecatapi.com/v1/images/search?breed_ids=breed_identifier
 ```
 
 Write a function `fetchCatByBreed(breedId)` that expects a breed identifier,
