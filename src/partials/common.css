@@ -13,12 +13,13 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 6vw;
   color: whitesmoke;
-  margin-bottom: 20px;
+  margin-bottom: 6vh;
 }
 
 .description {
-  font-size: 1.3em;
-  margin-bottom: 15px;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  margin-bottom: 4vh;
 }
 
 .temperament-span {
@@ -28,16 +29,12 @@
 
 .wiki-ref {
   text-decoration: none;
-  font-size: 1.3em;
+  font-size: 1.5em;
   color: white;
+  transition: text-decoration 1s ease-;
 }
 
 .wiki-ref:hover {
-  color: aquamarine;
-}
-
-.text-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  color: white;
+  text-decoration: underline;
 }

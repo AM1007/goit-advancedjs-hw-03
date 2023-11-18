@@ -1,11 +1,11 @@
+import { fetchBreeds, fetchCatByBreed } from './js/cat-api.js';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
 
 const breedSelect = document.querySelector('.breed-select');
 const placeholderOption = document.createElement('option');
 placeholderOption.value = '';
-placeholderOption.text = 'Select a cat breed';
+placeholderOption.text = 'Choose Your Kitty';
 breedSelect.appendChild(placeholderOption);
 
 /**
@@ -42,6 +42,9 @@ function displayCatInfo(catData) {
   catInfoDiv.style.display = 'block';
 }
 
+/**
+ * Fetch a cat data on page
+ */
 function handleBreedSelectionChange() {
   const selectedBreedId = document.querySelector('.breed-select').value;
   const placeholderOption = document.querySelector(
@@ -52,7 +55,6 @@ function handleBreedSelectionChange() {
   }
 
   iziToast.info({
-    class: 'toast',
     icon: '',
     close: false,
     progressBar: false,
@@ -76,7 +78,9 @@ function handleBreedSelectionChange() {
     .catch(error => {
       iziToast.hide({}, document.querySelector('.iziToast'));
       iziToast.error({
-        title: 'Error',
+        icon: '',
+        close: false,
+        title: '',
         message: 'Error fetching cat information. Try again!',
         position: 'topRight',
         timeout: 5000,
@@ -91,7 +95,6 @@ document
 
 document.addEventListener('DOMContentLoaded', () => {
   iziToast.info({
-    class: 'toast',
     icon: '',
     close: false,
     progressBar: false,
@@ -116,7 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(error => {
       iziToast.hide({}, document.querySelector('.iziToast'));
       iziToast.error({
-        title: 'Error',
+        icon: '',
+        close: false,
+        title: '',
         message: 'Error fetching cat breeds. Try again!',
         position: 'topRight',
         timeout: 5000,
