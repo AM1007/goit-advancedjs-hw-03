@@ -1,0 +1,56 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+body {
+  font-family: 'Fira Mono', sans-serif;
+  margin: 20px;
+  background: #22222a;
+  min-height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+textarea,
+button,
+select {
+  font: inherit;
+}
+
+select.breed-select {
+  display: none;
+}
+
+p.loader {
+  display: none;
+}
+
+p.error {
+  display: none;
+}
+
+div.cat-info {
+  display: none;
+  margin-top: 20px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+p {
+  color: whitesmoke;
+}

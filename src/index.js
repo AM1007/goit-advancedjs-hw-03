@@ -2,66 +2,125 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 import { fetchBreeds, fetchCatByBreed } from './cat-api.js';
 
+const breedSelect = document.querySelector('.breed-select');
+const placeholderOption = document.createElement('option');
+placeholderOption.value = '';
+placeholderOption.text = 'Select a cat breed';
+breedSelect.appendChild(placeholderOption);
+
 /**
- * Function to handle the breed selection change event
+ * Populate the breed select dropdown
+ * @param {*} breeds
  */
+function populateBreedSelect(breeds) {
+  breeds.forEach(breed => {
+    const option = document.createElement('option');
+    option.value = breed.id;
+    option.text = breed.name;
+    breedSelect.appendChild(option);
+  });
+}
+
+const catInfoDiv = document.querySelector('.cat-info');
+
+/**
+ * add CatInfo data markup
+ * @param {*} catData
+ */
+function displayCatInfo(catData) {
+  catInfoDiv.innerHTML = `
+  <div class="wrapper">
+    <img class="picture" src="${catData.url}" alt="${catData.breeds[0].name}">
+    <div class="text-content">
+      <h1 class="breed">${catData.breeds[0].name}</h1>
+      <p class="description">${catData.breeds[0].description}</p>
+      <p class="description"><span class="temperament-span">Temperament:</span> ${catData.breeds[0].temperament}</p>
+      <a class="wiki-ref" href="${catData.breeds[0].wikipedia_url}" target="_blank"> More Info...</a>
+    </div>
+  </div>
+  `;
+  catInfoDiv.style.display = 'block';
+}
+
 function handleBreedSelectionChange() {
   const selectedBreedId = document.querySelector('.breed-select').value;
-  document.querySelector('.loader').style.display = 'block';
-  document.querySelector('.cat-info').style.display = 'none';
+  const placeholderOption = document.querySelector(
+    '.breed-select option[value=""]'
+  );
+  if (placeholderOption) {
+    document.querySelector('.breed-select').removeChild(placeholderOption);
+  }
 
-  // Fetch cat information based on the selected breed
+  iziToast.info({
+    class: 'toast',
+    icon: '',
+    close: false,
+    progressBar: false,
+    messageColor: 'white',
+    messageSize: '80',
+    overlay: true,
+    overlayColor: '#22222a',
+    backgroundColor: 'transparent',
+    message: 'KITTY, KITTY, KITTY...',
+    position: 'center',
+    transitionIn: 'bounceInRight',
+    transitionOut: 'fadeOutRight',
+    timeout: 5000,
+  });
+
   fetchCatByBreed(selectedBreedId)
     .then(catData => {
-      // Display cat information
-      const catInfoDiv = document.querySelector('.cat-info');
-      catInfoDiv.innerHTML = `
-        <img src="${catData.url}" width="500" alt="${catData.breeds[0].name}">
-        <p>Breed: ${catData.breeds[0].name}</p>
-        <p>Description: ${catData.breeds[0].description}</p>
-        <p>Temperament: ${catData.breeds[0].temperament}</p>
-      `;
-
-      // Hide loader and display cat information
-      document.querySelector('.loader').style.display = 'none';
-      catInfoDiv.style.display = 'block';
+      iziToast.hide({}, document.querySelector('.iziToast'));
+      displayCatInfo(catData);
     })
     .catch(error => {
-      // Display error message
-      document.querySelector('.loader').style.display = 'none';
-      document.querySelector('.error').style.display = 'block';
+      iziToast.hide({}, document.querySelector('.iziToast'));
       iziToast.error({
-        message: `Error fetching cat information:`,
+        title: 'Error',
+        message: 'Error fetching cat information. Try again!',
         position: 'topRight',
+        timeout: 5000,
       });
-      console.error(`${error.message}`, error);
+      console.error('Error fetching cat information:', error);
     });
 }
 
-// Set up event listener for breed selection change
 document
   .querySelector('.breed-select')
   .addEventListener('change', handleBreedSelectionChange);
 
-// Fetch breeds and populate the breed select dropdown on page load
 document.addEventListener('DOMContentLoaded', () => {
-  // Display loader while fetching breeds
-  document.querySelector('.loader').style.display = 'block';
-  document.querySelector('.cat-info').style.display = 'none';
+  iziToast.info({
+    class: 'toast',
+    icon: '',
+    close: false,
+    progressBar: false,
+    messageColor: 'white',
+    messageSize: '80',
+    overlay: true,
+    overlayColor: '#22222a',
+    backgroundColor: 'transparent',
+    message: 'KITTY, KITTY, KITTY...',
+    position: 'center',
+    transitionIn: 'bounceInRight',
+    transitionOut: 'fadeOutRight',
+    timeout: 5000,
+  });
 
-  // Fetch breeds and populate the breed select dropdown
   fetchBreeds()
-    .then(() => {
-      document.querySelector('.loader').style.display = 'none';
+    .then(breeds => {
+      iziToast.hide({}, document.querySelector('.iziToast'));
+      populateBreedSelect(breeds);
       document.querySelector('.breed-select').style.display = 'block';
     })
     .catch(error => {
-      document.querySelector('.loader').style.display = 'none';
-      document.querySelector('.error').style.display = 'block';
+      iziToast.hide({}, document.querySelector('.iziToast'));
       iziToast.error({
-        message: `Error fetching breeds:`,
+        title: 'Error',
+        message: 'Error fetching cat breeds. Try again!',
         position: 'topRight',
+        timeout: 5000,
       });
-      console.error(`${error.message}`, error);
+      console.error('Error fetching breeds:', error);
     });
 });
