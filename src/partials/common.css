@@ -38,3 +38,11 @@
   color: white;
   text-decoration: underline;
 }
+
+.error-page {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3vw;
+}
